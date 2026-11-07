@@ -2,7 +2,9 @@
 
 A terminal tool for learning Vim through bite-sized lessons (~60s reads) and short hands-on drills (~30s practice in your real editor).
 
-No streaks, no accounts, and no calendar lockouts.
+<p align="center">
+  <img src="assets/screenshot.png" alt="vimbyte terminal card" width="800">
+</p>
 
 ## Install
 
