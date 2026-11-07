@@ -1,0 +1,45 @@
+id: "07-paragraph-motions"
+track: "motions"
+order: 3
+est_seconds: 45
+title: "Block Motions: { and }"
+summary: "Traverse functions and code blocks by leaping across empty line boundaries."
+keys:
+  - key: "}"
+    desc: "Jump forward to next empty line / paragraph boundary"
+  - key: "{"
+    desc: "Jump backward to previous empty line / paragraph boundary"
+body: |
+  In prose and source code, blank lines delineate logical paragraphs and functions.
+  Instead of hitting 'j' 30 times, use '{' and '}':
+
+    } : jumps down to the next blank line
+    { : jumps up to the previous blank line
+
+  This is the fastest way to leap over entire function declarations and docblocks.
+drill: |
+  func Alpha() {
+      // First function block
+      return 1
+  }
+
+  func Beta() {
+      // Second function block
+      return 2
+  }
+
+  func Gamma() {
+      // Third function block
+      return 3
+  }
+instructions: |
+  1. Start at the top of the buffer (on func Alpha).
+  2. Press '}' to leap straight to the blank line between Alpha and Beta.
+  3. Press '}' again to leap to the blank line between Beta and Gamma.
+  4. Press '{' twice to leap all the way back to the top.
+solution: |
+  From line 1:
+  1. Press '}' -> jumps to line 5
+  2. Press '}' -> jumps to line 10
+  3. Press '{' -> returns to line 5
+  4. Press '{' -> returns to line 1

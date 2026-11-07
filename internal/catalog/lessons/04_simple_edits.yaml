@@ -1,0 +1,46 @@
+id: "04-simple-edits"
+track: "basics"
+order: 4
+est_seconds: 60
+title: "Appending, Lines & Undo: a, A, o, O, u, <C-r>"
+summary: "Enter insert mode anywhere with a, A, o, O, and fearlessly undo mistakes."
+keys:
+  - key: "a"
+    desc: "Append after current cursor character"
+  - key: "A"
+    desc: "Append at end of the line"
+  - key: "o"
+    desc: "Open new line below and enter insert mode"
+  - key: "O"
+    desc: "Open new line above and enter insert mode"
+  - key: "u"
+    desc: "Undo last change"
+  - key: "<Ctrl-r>"
+    desc: "Redo undone change"
+body: |
+  'i' inserts before the cursor, but often you want to type *after* it:
+    a : append right after cursor
+    A : jump to line end and enter Insert mode (huge time saver!)
+
+  Opening new lines:
+    o : create empty line *below* current line and enter Insert mode
+    O : create empty line *above* current line and enter Insert mode
+
+  Mistakes happen:
+    u       : undo last change
+    <Ctrl-r>: redo the change you just undid
+drill: |
+  func main() {
+      fmt.Println("First line")
+      // [TASK 1: Append a semicolon at the end of this comment]
+      // [TASK 2: Use 'o' to add a print statement below this line]
+  }
+instructions: |
+  1. Move to the end of TASK 1 line and press 'A', type ';', then press '<Esc>'.
+  2. Move to TASK 2 line and press 'o'. Type 'fmt.Println("Inserted with o")' then '<Esc>'.
+  3. Press 'u' to undo the insertion.
+  4. Press '<Ctrl-r>' to redo the insertion!
+solution: |
+  1. On TASK 1 line: press 'A', type ';', press '<Esc>'.
+  2. On TASK 2 line: press 'o', type your code, press '<Esc>'.
+  3. Press 'u' to see it vanish; press '<Ctrl-r>' to restore it.

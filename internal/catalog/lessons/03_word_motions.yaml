@@ -1,0 +1,39 @@
+id: "03-word-motions"
+track: "basics"
+order: 3
+est_seconds: 60
+title: "Word Motions: w, b, e, W, B, E"
+summary: "Traverse lines rapidly word-by-word instead of single-character steps."
+keys:
+  - key: "w"
+    desc: "Jump forward to start of next word"
+  - key: "b"
+    desc: "Jump backward to start of previous word"
+  - key: "e"
+    desc: "Jump forward to end of current/next word"
+  - key: "W / B"
+    desc: "Jump words separated solely by whitespace (ignoring punctuation)"
+body: |
+  Pressing 'l' dozens of times is slow. Word motions allow rapid leaping:
+
+    w : jump forward to beginning of next word
+    b : jump backward to start of previous word
+    e : jump forward to the end of the word
+
+  Capitalized versions (W, B, E) treat punctuation as part of the word, jumping
+  only across whitespace boundaries (ideal for code paths and URLs).
+drill: |
+  target_url = "https://github.com/RaihanStark/vimbyte"
+  config_path = "/usr/local/bin/vimbyte"
+
+  // Jump smoothly through every token using 'w', then backwards with 'b'.
+  // Notice how 'w' stops at punctuation while 'W' jumps whole tokens!
+instructions: |
+  1. Start at the top of the file.
+  2. Press 'w' repeatedly to step across each token: target_url, =, ", https, :, //, github, ., com...
+  3. Press 'b' repeatedly to hop backwards.
+  4. Jump back to target_url, then try pressing 'W' to see the difference!
+solution: |
+  From beginning of line:
+  - 'w' stops at '=', '"', 'https', ':', '/', '/', 'github', '.', 'com'
+  - 'W' jumps straight from 'target_url' to '=' to '"https://github.com/RaihanStark/vimbyte"'

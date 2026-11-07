@@ -1,0 +1,39 @@
+id: "02-modes"
+track: "basics"
+order: 2
+est_seconds: 50
+title: "The Modes of Vim: Normal & Insert"
+summary: "Understand how Vim separates editing from moving through modal interaction."
+keys:
+  - key: "i"
+    desc: "Enter Insert mode before current cursor position"
+  - key: "I"
+    desc: "Enter Insert mode at first non-blank character of line"
+  - key: "<Esc>"
+    desc: "Return to Normal mode from any mode"
+  - key: ":wq"
+    desc: "Command-line mode: save file and quit"
+body: |
+  Unlike regular editors where typing immediately inserts characters, Vim starts
+  in NORMAL MODE. Normal mode is for reading, navigating, and issuing commands.
+
+  To type text, enter INSERT MODE by pressing 'i'. When you finish typing,
+  ALWAYS press <Esc> (or Ctrl-[) to return to Normal mode.
+
+  Golden Rule of Vim:
+  Normal mode is home. Spend 90% of your time in Normal mode; only drop
+  into Insert mode for discrete typing actions.
+drill: |
+  // Task: Fill in the missing words in the sentences below.
+
+  Sentence 1: Vim is a ______ editor.
+  Sentence 2: Press ______ to return to Normal mode.
+instructions: |
+  1. Use 'j' and 'l' in Normal mode to navigate onto the first blank '______'.
+  2. Press 'i' to enter Insert mode.
+  3. Type 'modal' and immediately press '<Esc>' to return to Normal mode.
+  4. Navigate to the second blank, press 'i', type '<Esc>', and return to Normal mode.
+solution: |
+  1. Position cursor on blank: /______<Enter>
+  2. Press 'cw' (or 'i' then backspace), type 'modal', press '<Esc>'.
+  3. Move down 'j', type 'cw', type '<Esc>', press '<Esc>'.

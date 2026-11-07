@@ -1,0 +1,39 @@
+id: "15-yank-put"
+track: "registers"
+order: 1
+est_seconds: 50
+title: "Yanking & Putting: y, p, P"
+summary: "Copy and paste with precision inside the editor without touching a mouse."
+keys:
+  - key: "yy"
+    desc: "Yank (copy) current line"
+  - key: "yw"
+    desc: "Yank (copy) word"
+  - key: "p"
+    desc: "Put (paste) clipboard content after cursor / below line"
+  - key: "P"
+    desc: "Put (paste) clipboard content before cursor / above line"
+body: |
+  In Vim, 'copying' is called YANKING (y) and 'pasting' is called PUTTING (p).
+
+    yy : yank the whole current line into the default register
+    p  : put contents after the cursor (or on the line below)
+    P  : put contents before the cursor (or on the line above)
+
+  Note: When you delete text with 'd' or 'x', Vim also places that text into
+  the default register! This means 'd' doubles as a 'Cut' command.
+drill: |
+  Row A: alpha
+  Row B: beta
+  Row C: gamma
+
+  // Task: Duplicate 'Row A: alpha' right below 'Row C: gamma'.
+instructions: |
+  1. Position your cursor on 'Row A: alpha'.
+  2. Press 'yy' to yank the line.
+  3. Move down to 'Row C: gamma' using 'jj'.
+  4. Press 'p' to paste Row A right beneath Row C.
+solution: |
+  1. On Row A: 'yy'
+  2. '2j'
+  3. 'p'

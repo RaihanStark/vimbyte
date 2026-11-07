@@ -1,0 +1,44 @@
+id: "14-visual-block-insert"
+track: "visual"
+order: 2
+est_seconds: 60
+title: "Visual Block Insert: <Ctrl-v> + I"
+summary: "Insert text or comment markers across multiple lines simultaneously."
+keys:
+  - key: "<Ctrl-v>"
+    desc: "Enter Visual Block mode"
+  - key: "I{text}<Esc>"
+    desc: "Insert {text} before the block on every highlighted line"
+  - key: "A{text}<Esc>"
+    desc: "Append {text} after the block on every highlighted line"
+body: |
+  Visual Block mode shines when editing tables or commenting out code:
+
+  To prepend text to multiple lines:
+    1. Place cursor at top-left of the target block
+    2. Press <Ctrl-v>
+    3. Use 'j' to expand down across the target lines
+    4. Press 'I' (capital I)
+    5. Type the text you want (e.g., '// ')
+    6. Press <Esc>
+    -> Vim will automatically replicate the typed text across all lines!
+drill: |
+  apple
+  banana
+  cherry
+  dragonfruit
+
+  // Task: Turn all 4 fruits above into bullet points: "- apple", "- banana", etc.
+instructions: |
+  1. Position cursor on the 'a' of 'apple'.
+  2. Press '<Ctrl-v>' to enter Visual Block mode.
+  3. Press '3j' to extend the 1-character-wide column down to 'dragonfruit'.
+  4. Press 'I' (capital i).
+  5. Type '- ' (dash then space).
+  6. Press '<Esc>' (wait a fraction of a second for Vim to duplicate across lines).
+solution: |
+  1. On 'a' in 'apple': '<Ctrl-v>'
+  2. '3j'
+  3. 'I'
+  4. Type '- '
+  5. '<Esc>'

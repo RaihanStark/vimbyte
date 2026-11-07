@@ -1,0 +1,42 @@
+id: "13-visual-modes"
+track: "visual"
+order: 1
+est_seconds: 50
+title: "Visual Modes: v, V, <Ctrl-v>"
+summary: "Highlight character, line, and column blocks before executing operations."
+keys:
+  - key: "v"
+    desc: "Start character-wise Visual mode"
+  - key: "V"
+    desc: "Start line-wise Visual mode"
+  - key: "<Ctrl-v>"
+    desc: "Start block-wise (column) Visual mode"
+  - key: "o"
+    desc: "In Visual mode: jump cursor to opposite end of selection"
+body: |
+  Visual mode lets you see the exact text region you are about to act on.
+  There are three distinct visual modes:
+
+    v       : Character-wise (selects arbitrary text character by character)
+    V       : Line-wise (selects whole lines up and down)
+    <Ctrl-v>: Block-wise (selects a 2D rectangular box of columns)
+
+  While in Visual mode, operators act on the selected range:
+    'd' deletes selection
+    'y' copies selection
+    'c' replaces selection
+drill: |
+  func DeleteThisBlock() {
+      line1 := "alpha"
+      line2 := "beta"
+      line3 := "gamma"
+  }
+instructions: |
+  1. Position cursor on line1.
+  2. Press 'V' to enter Visual Line mode.
+  3. Press 'j' twice to expand the selection over line2 and line3.
+  4. Press 'd' to delete all three lines at once!
+solution: |
+  1. On line1: 'V'
+  2. '2j' to highlight the 3 lines
+  3. 'd' to delete

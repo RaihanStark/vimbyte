@@ -1,0 +1,39 @@
+id: "11-replace-change"
+track: "editing"
+order: 3
+est_seconds: 50
+title: "Surgical Edits: r, s, C, D, x"
+summary: "Replace characters and chop lines with quick one-key commands."
+keys:
+  - key: "r{char}"
+    desc: "Replace single character under cursor with {char} (remains in Normal mode)"
+  - key: "s"
+    desc: "Substitute character under cursor and enter Insert mode"
+  - key: "C"
+    desc: "Change to end of line (shorthand for c$)"
+  - key: "D"
+    desc: "Delete to end of line (shorthand for d$)"
+  - key: "x"
+    desc: "Delete single character under cursor (like Del key)"
+body: |
+  Often you only need to fix a single typo or delete to the end of a line.
+  Entering Insert mode just to fix one letter is inefficient.
+
+    r : replace character under cursor with next typed key
+        (example: 'r;' turns a typo into a semicolon, staying in Normal mode!)
+    s : substitute character and jump into Insert mode
+    C : change from cursor to end of line
+    D : delete from cursor to end of line
+    x : delete character under cursor
+drill: |
+  // Fix the typos below:
+  const port = 808O;
+  const url = "http://localhost" // [D this trailing note: delete this entire text]
+instructions: |
+  1. In '808O', place cursor on the capital 'O'.
+  2. Press 'r0' (replace 'O' with '0'). Notice you stay in Normal mode!
+  3. In line 3, move to the '//' comment start.
+  4. Press 'D' to delete to the end of the line.
+solution: |
+  1. Cursor on 'O': type 'r0'
+  2. Cursor on '//': type 'D'

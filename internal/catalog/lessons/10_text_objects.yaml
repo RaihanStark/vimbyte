@@ -1,0 +1,39 @@
+id: "10-text-objects"
+track: "editing"
+order: 2
+est_seconds: 70
+title: "Text Objects: The Ultimate Superpower"
+summary: "Target words, quotes, and parenthetical blocks without positioning at the edges."
+keys:
+  - key: "ciw / diw"
+    desc: "Change / delete inside current word"
+  - key: "caw / daw"
+    desc: "Change / delete around current word (includes trailing whitespace)"
+  - key: "ci\" / di\""
+    desc: "Change / delete inside double quotes"
+  - key: "ci( / ci{"
+    desc: "Change inside parentheses / braces"
+body: |
+  With motions, your cursor must be at the start or end of what you want to change.
+  Text Objects remove that restriction entirely!
+
+  Format:
+    [OPERATOR] + [i|a] + [OBJECT]
+    i = inside (excludes delimiters / whitespace)
+    a = around (includes delimiters / whitespace)
+
+  Examples:
+    ciw = change inside word (cursor can be on ANY letter of the word!)
+    di" = delete inside quotes (cursor can be anywhere inside the quotes!)
+    ca( = change around parens (replaces the parentheses themselves too)
+drill: |
+  msg = "Greetings, weary traveler of the CLI!"
+  calculate(parameter_one, parameter_two)
+instructions: |
+  1. In the 'msg' line, place your cursor anywhere inside 'weary traveler'.
+  2. Press 'ci"' - watch the entire string disappear and enter Insert mode!
+  3. Type 'Hello, Vim user!' and press '<Esc>'.
+  4. In the calculate line, place cursor on 'parameter_one' and press 'diw'.
+solution: |
+  1. Inside quotes: 'ci"', type new string, '<Esc>'.
+  2. On 'parameter_one': 'diw' (or 'daw' to clean up comma spacing).

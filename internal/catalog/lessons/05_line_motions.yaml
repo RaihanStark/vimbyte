@@ -1,0 +1,39 @@
+id: "05-line-motions"
+track: "motions"
+order: 1
+est_seconds: 50
+title: "Line Boundaries: 0, ^, $, g_"
+summary: "Instantly teleport between the start, first word, and end of any line."
+keys:
+  - key: "0"
+    desc: "Jump to absolute column 0 (beginning of line)"
+  - key: "^"
+    desc: "Jump to first non-whitespace character of line"
+  - key: "$"
+    desc: "Jump to the very end of the line"
+  - key: "g_"
+    desc: "Jump to last non-whitespace character of line"
+body: |
+  Never hold down 'h' or 'l' to cross a line! Use direct line boundary anchors:
+
+    0  : moves cursor to column 0 (including leading tabs/spaces)
+    ^  : moves cursor to the first actual code/text character
+    $  : moves cursor to the end of the line
+    g_ : moves cursor to the last non-blank character (ignores trailing space)
+
+  In 90% of coding situations, '^' is what you want instead of '0'.
+drill: |
+  // Observe leading whitespace on these indented lines:
+        const APIEndpoint = "https://api.vimbyte.dev/v1/sync";
+            let timeoutSeconds = 30;
+
+  // Practice jumping between leading indentation and the end of the statements.
+instructions: |
+  1. Position your cursor anywhere in the 'const APIEndpoint' line.
+  2. Press '0' to see cursor jump to column 0 (in front of whitespace).
+  3. Press '^' to jump straight onto the 'c' in 'const'.
+  4. Press '$' to jump to the trailing semicolon ';'.
+solution: |
+  1. Type '^' -> cursor lands on 'c'
+  2. Type '$' -> cursor lands on ';'
+  3. Type '0' -> cursor lands on column 1

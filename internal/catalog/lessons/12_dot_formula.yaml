@@ -1,0 +1,38 @@
+id: "12-dot-formula"
+track: "editing"
+order: 4
+est_seconds: 60
+title: "The Dot Formula: ."
+summary: "Repeat your last change with a single keystroke to edit with rhythm."
+keys:
+  - key: "."
+    desc: "Repeat last change / modification"
+body: |
+  The dot command '.' is Vim's most famous accelerator. It repeats the last
+  change you made.
+
+  What is a 'change'?
+  Any command that alters text—from the moment you initiate an edit (like 'cw' or
+  'A;' or 'x') until you exit back to Normal mode with <Esc>.
+
+  The Dot Formula:
+    One movement + One dot.
+    Navigate to the target, press '.', navigate, press '.'.
+drill: |
+  item1 = "apple"
+  item2 = "banana"
+  item3 = "cherry"
+  item4 = "date"
+
+  // Task: Add a semicolon ';' to the end of all 4 lines using 'A;' and '.'
+instructions: |
+  1. Position your cursor on the 'item1' line.
+  2. Press 'A', type ';', and press '<Esc>'. (This defines your change!)
+  3. Press 'j' to move down to the 'item2' line.
+  4. Press '.' - boom! The semicolon is appended automatically!
+  5. Press 'j.' and 'j.' to finish the remaining two lines!
+solution: |
+  1. Line 1: 'A;' then '<Esc>'
+  2. Line 2: 'j.'
+  3. Line 3: 'j.'
+  4. Line 4: 'j.'

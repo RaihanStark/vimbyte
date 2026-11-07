@@ -1,0 +1,32 @@
+id: "08-matching-pairs"
+track: "motions"
+order: 4
+est_seconds: 40
+title: "Delimiter Jumping: %"
+summary: "Bounce between matching parentheses, brackets, and braces instantaneously."
+keys:
+  - key: "%"
+    desc: "Jump to matching parenthetical pair: (), [], {}, or /* */"
+body: |
+  In code with nested structures, finding the opening or closing bracket can
+  be tricky. The percent symbol '%' jumps between matching pairs:
+
+    (  <--->  )
+    [  <--->  ]
+    {  <--->  }
+
+  If your cursor is not directly on a bracket, '%' automatically searches forward
+  on the current line for the first bracket and jumps to its match!
+drill: |
+  if (config.EnableSandbox && (user.IsAdmin() || user.HasToken())) {
+      execute_privileged_task([payload.GetBytes()]);
+  }
+instructions: |
+  1. Position your cursor at the beginning of 'if'.
+  2. Press '%' to immediately jump to the closing ')' of the if-condition.
+  3. Press '%' again to bounce back to the opening '('.
+  4. Move down to 'execute_privileged_task' and jump between the '[' and ']'.
+solution: |
+  1. From 'if': press '%' -> cursor on ')' before '{'
+  2. Press '%' -> cursor bounces to '(' after 'if'
+  3. Move to '[': press '%' -> cursor on ']'

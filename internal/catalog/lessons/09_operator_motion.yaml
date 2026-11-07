@@ -1,0 +1,42 @@
+id: "09-operator-motion"
+track: "editing"
+order: 1
+est_seconds: 60
+title: "The Grammar of Vim: Operator + Motion"
+summary: "Combine action verbs (d, c, y) with spatial nouns to speak the language of Vim."
+keys:
+  - key: "d{motion}"
+    desc: "Delete from cursor across the motion (e.g., dw, d$, d})"
+  - key: "c{motion}"
+    desc: "Change (delete and enter Insert mode) across the motion"
+  - key: "y{motion}"
+    desc: "Yank (copy) across the motion into register"
+  - key: "dd / cc / yy"
+    desc: "Double the operator to act on the entire line"
+body: |
+  Vim's keystrokes are a composable grammar:
+    [OPERATOR] + [MOTION]
+
+  Common operators:
+    d = delete
+    c = change (delete + enter Insert mode)
+    y = yank (copy)
+
+  Combine them freely with motions you already know:
+    dw = delete word
+    d$ = delete to end of line
+    c$ = change to end of line
+    d} = delete to end of paragraph
+    yy = copy entire line
+drill: |
+  Delete me: unwanted_prefix_text_keep_this
+  Change me: let host = "old-production-domain.com"
+  Line to remove: // obsolete debug log entry
+instructions: |
+  1. On line 1, move cursor to 'unwanted_prefix_' and press 'dw' (or 'd_') to delete it, keeping 'text_keep_this'.
+  2. On line 2, move inside the quotes, press 'ci"' and type 'new-server.internal' then '<Esc>'.
+  3. On line 3, press 'dd' to completely obliterate the obsolete debug line.
+solution: |
+  1. Move to unwanted prefix: 'dw' twice or 'd_' to clean.
+  2. Move inside quotes: 'ci"', type new domain, '<Esc>'.
+  3. Move to line 3: 'dd'.

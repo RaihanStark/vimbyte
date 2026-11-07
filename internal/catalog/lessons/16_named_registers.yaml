@@ -1,0 +1,44 @@
+id: "16-named-registers"
+track: "registers"
+order: 2
+est_seconds: 60
+title: "Named Registers & Clipboard: \"a-\"z, \"+"
+summary: "Store multiple clips simultaneously and bridge Vim with your OS clipboard."
+keys:
+  - key: "\"ay"
+    desc: "Yank motion into named register 'a'"
+  - key: "\"ap"
+    desc: "Put contents of named register 'a'"
+  - key: "\"+y"
+    desc: "Yank selection into system clipboard"
+  - key: "\"+p"
+    desc: "Paste directly from system clipboard into Vim"
+  - key: ":reg"
+    desc: "Inspect contents of all Vim registers"
+body: |
+  Unlike standard clipboards with only one slot, Vim has 26 named registers ('a' through 'z')
+  plus special registers ('"' unnamed, '0' yank history, '+' system clipboard).
+
+  To use a register, prefix the operator with double-quotes and the letter:
+    "ay$ : copy to end of line into register 'a'
+    "ap  : paste what is in register 'a'
+
+  System Clipboard:
+    "+yy : copy line to system clipboard (available to browser/slack/other apps)
+    "+p  : paste from OS clipboard into Vim
+drill: |
+  Value 1: [CONFIG_KEY_SECRET]
+  Value 2: [DATABASE_URL_DEV]
+
+  // Task: Store Value 1 into register 'a', Value 2 into register 'b',
+  // and paste both at the bottom without overwriting each other.
+instructions: |
+  1. Position cursor on '[CONFIG_KEY_SECRET]'.
+  2. Press '"ayiw' (or '"ay$') to yank into register 'a'.
+  3. Move to '[DATABASE_URL_DEV]'.
+  4. Press '"byiw' to yank into register 'b'.
+  5. Go to bottom line, press '"ap' then '"bp'.
+solution: |
+  1. On key 1: '"ayiw'
+  2. On key 2: '"byiw'
+  3. On destination line: '"ap' then '"bp'

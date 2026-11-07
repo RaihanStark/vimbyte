@@ -1,0 +1,45 @@
+id: "06-find-char"
+track: "motions"
+order: 2
+est_seconds: 60
+title: "Inline Search: f, F, t, T, ;, ,"
+summary: "Snipe characters across a line with pinpoint forward and backward finding."
+keys:
+  - key: "f{char}"
+    desc: "Find and jump forward ONTO matching character"
+  - key: "F{char}"
+    desc: "Find and jump backward ONTO matching character"
+  - key: "t{char}"
+    desc: "Jump forward TILL one character before match"
+  - key: "T{char}"
+    desc: "Jump backward TILL one character after match"
+  - key: ";"
+    desc: "Repeat previous f/F/t/T search in same direction"
+  - key: ","
+    desc: "Repeat previous f/F/t/T search in opposite direction"
+body: |
+  'f' stands for 'Find'. When you type 'fa', Vim jumps forward directly
+  onto the next letter 'a' on the current line.
+
+  't' stands for 'Till'. Typing 'ta' lands you right BEFORE the letter 'a'.
+  This is extraordinarily useful when pairing with deletion ('dt"').
+
+  To repeat the jump without typing 'f' again:
+    ; : repeat search forward
+    , : repeat search backward
+drill: |
+  result = process(user_id, account_hash, role_matrix, status_flag)
+
+  // Use 'f,' to jump through each comma in the parameter list.
+  // Use ';' to repeat to the next comma.
+  // Use ',' to jump back to previous commas.
+instructions: |
+  1. Place cursor at 'result'.
+  2. Press 'f,' to jump straight to the first comma after 'user_id'.
+  3. Press ';' twice to jump to the second and third commas.
+  4. Press ',' to jump back to the previous comma.
+solution: |
+  1. f, -> cursor on comma 1
+  2. ;  -> cursor on comma 2
+  3. ;  -> cursor on comma 3
+  4. ,  -> cursor returns to comma 2
