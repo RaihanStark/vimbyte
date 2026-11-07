@@ -4,7 +4,9 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 
 	"github.com/RaihanStark/vimbyte/internal/catalog"
 	"github.com/RaihanStark/vimbyte/internal/runner"
@@ -238,9 +240,29 @@ func handleInteractiveCard(cat *catalog.Catalog, store *state.Store, r *runner.R
 	}
 
 	showSolution := false
+	statusMsg := ""
+
+	// Switch to terminal alternate screen buffer (like Vim, less, and other TUIs)
+	if ui.IsTerminal() {
+		ui.EnterAltScreen()
+		defer ui.ExitAltScreen()
+
+		sigChan := make(chan os.Signal, 1)
+		signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
+		defer signal.Stop(sigChan)
+		go func() {
+			<-sigChan
+			ui.ExitAltScreen()
+			os.Exit(0)
+		}()
+	}
 
 	// Interactive Loop
 	for {
+		if ui.IsTerminal() {
+			ui.ClearDisplay()
+		}
+
 		progress := store.GetLessonProgress(currentLesson.ID)
 		trackList := cat.List(currentLesson.Track)
 		cardOutput := ui.RenderLessonCard(currentLesson, progress, len(trackList), showSolution)
@@ -254,6 +276,11 @@ func handleInteractiveCard(cat *catalog.Catalog, store *state.Store, r *runner.R
 
 		fmt.Print(ui.RenderPromptBar(showSolution))
 
+		if statusMsg != "" {
+			fmt.Printf(" %s\n", statusMsg)
+			statusMsg = ""
+		}
+
 		action, err := ui.ReadSingleKey()
 		if err != nil {
 			return nil
@@ -261,16 +288,21 @@ func handleInteractiveCard(cat *catalog.Catalog, store *state.Store, r *runner.R
 
 		switch action {
 		case ui.ActionDrill:
+			// Restore primary screen so Vim has full terminal control
+			ui.ExitAltScreen()
 			_, _ = store.RecordDrill(currentLesson.ID)
 			res, runErr := r.Run(currentLesson)
+			// Return to alternate screen buffer upon exit
+			ui.EnterAltScreen()
+
 			if runErr != nil {
-				fmt.Printf("%s %v\n", ui.Colorize(ui.Bold+ui.BrightRed, "Drill error:"), runErr)
+				statusMsg = fmt.Sprintf("%s %v", ui.Colorize(ui.Bold+ui.BrightRed, "Drill error:"), runErr)
 			} else {
 				modNotice := ""
 				if res.Modified {
 					modNotice = " (buffer modified)"
 				}
-				fmt.Printf("\n%s Drill session ended (%0.1fs)%s.\n",
+				statusMsg = fmt.Sprintf("%s Drill completed in %0.1fs%s.",
 					ui.Colorize(ui.Bold+ui.BrightGreen, "✓"),
 					res.Duration.Seconds(),
 					modNotice,
@@ -282,7 +314,7 @@ func handleInteractiveCard(cat *catalog.Catalog, store *state.Store, r *runner.R
 				return fmt.Errorf("marking lesson done: %w", err)
 			}
 			badge := ui.RenderStatusBadge(newProg.Status)
-			fmt.Printf("\n%s Marked '%s' as done! %s (repetitions: %d)\n\n",
+			statusMsg = fmt.Sprintf("%s Marked '%s' as done! %s (repetitions: %d)",
 				ui.Colorize(ui.Bold+ui.BrightGreen, "✓"),
 				currentLesson.ID,
 				badge,
@@ -301,18 +333,19 @@ func handleInteractiveCard(cat *catalog.Catalog, store *state.Store, r *runner.R
 				currentLesson = next
 				showSolution = false
 			} else {
-				fmt.Println(ui.Colorize(ui.Dim, " End of track reached."))
+				statusMsg = ui.Colorize(ui.Dim, "End of track reached.")
 			}
 		case ui.ActionPrev:
 			prev := cat.PrevInTrack(currentLesson.Track, currentLesson.ID)
 			if prev != nil {
 				currentLesson = prev
 				showSolution = false
+			} else {
+				statusMsg = ui.Colorize(ui.Dim, "Already at first lesson in track.")
 			}
 		case ui.ActionToggleSolution:
 			showSolution = !showSolution
 		case ui.ActionQuit:
-			fmt.Println()
 			return nil
 		default:
 			// Ignore unrecognized single keystroke

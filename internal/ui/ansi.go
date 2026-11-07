@@ -33,12 +33,40 @@ const (
 	BgBlack       = "\033[40m"
 	BgBlue        = "\033[44m"
 	BgGray        = "\033[100m"
+
+	// Terminal Alternate Screen Buffer and Cursor control sequences
+	AltScreenEnter = "\033[?1049h\033[H"
+	AltScreenExit  = "\033[?1049l\033[?25h"
+	ClearScreen    = "\033[H\033[2J"
+	HideCursor     = "\033[?25l"
+	ShowCursor     = "\033[?25h"
 )
 
 var (
 	ansiRegex = regexp.MustCompile(`\x1b\[[0-9;]*[a-zA-Z]`)
 	noColor   = false
 )
+
+// EnterAltScreen switches the terminal to the alternate screen buffer (like Vim, less, and other TUIs).
+func EnterAltScreen() {
+	if IsTerminal() && !IsNoColor() {
+		os.Stdout.WriteString(AltScreenEnter + HideCursor)
+	}
+}
+
+// ExitAltScreen restores the primary screen buffer and cursor.
+func ExitAltScreen() {
+	if IsTerminal() {
+		os.Stdout.WriteString(AltScreenExit)
+	}
+}
+
+// ClearDisplay clears the entire screen and moves the cursor to row 1, col 1.
+func ClearDisplay() {
+	if IsTerminal() {
+		os.Stdout.WriteString(ClearScreen)
+	}
+}
 
 // SetNoColor globally configures whether ANSI escapes are emitted.
 func SetNoColor(disabled bool) {
